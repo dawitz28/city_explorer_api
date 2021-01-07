@@ -18,11 +18,11 @@ app.use(cors());
 app.get('/', (request, response) => {
   response.status(200).send('hello world');
 });
-app.get('/location', (request, response) => {
-  // Build our request to tak to locationIQ
 app.get('/weather', weatherHandler);
 
-  
+app.get('/location', (request, response) => {
+  // Build our request to tak to locationIQ
+
   let city = request.query.city;
   let key = process.env.GEOCODEKEY;
 
@@ -54,6 +54,7 @@ function weatherHandler (request, response) {
   const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
   const lat = request.query.latitude;
   const lon = request.query.longitude;
+  console.log(lat, lon);
   const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHER_API_KEY}&lat=${request.query.latitude}&lon=${request.query.longitude}&days=8`
   superagent.get(url).then(currentWeather => {
     const weatherForcast = currentWeather.body;

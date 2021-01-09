@@ -1,5 +1,6 @@
 'use strict';
 // let API = 'http://localhost:3000';
+
 // 1st: We bring in our modules/dependencies 
 
 require('dotenv').config();
@@ -63,9 +64,14 @@ function weatherHandler (request, response) {
   });
 };
 
-app.listen(PORT, () => 
-console.log(`Now listening on port, ${PORT}`));
+
+
 
 app.use('*', (request, response) => {
   response.status(500).send("Sorry, something went wrong");
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Now listening on port, ${PORT}`);
 });

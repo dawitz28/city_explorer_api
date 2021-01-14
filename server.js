@@ -1,9 +1,15 @@
 'use strict';
 
+// let API = 'http://localhost:3000';
+
+// 1st: We bring in our modules/dependencies 
+
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
+
 const pg = require('pg');
 const { request } = require('http');
 const { response } = require('express');
@@ -16,10 +22,13 @@ client.on('error', err => {
   throw err;
 });
 
+
+
 // routes:
 app.get('/', (request, response) => {
   response.status(200).send('hello world');
 });
+
 app.get('/location', locationHandler);
 app.get('/weather', weatherHandler);
 
@@ -63,12 +72,15 @@ function weatherHandler(request, response) {
   const lat = request.query.latitude;
   const lon = request.query.longitude;
   console.log(lat, lon);
+
+
   superagent.get(url).then(currentWeather => {
     const weatherForcast = currentWeather.body;
     const weatherData = weatherForcast.data.map(currentWeather => new Weather(currentWeather));
     response.send(weatherData);
   });
 };
+
 
 // constructor  
 function Weather(weather) {
@@ -82,9 +94,11 @@ function Location(city, geoData) {
   this.longitude = geoData.lon;
 };
 
+
 app.use('*', (request, response) => {
   response.status(500).send("Sorry, something went wrong");
 });
+
 
 client.connect()
   .then(() => {
@@ -93,3 +107,4 @@ client.connect()
       console.log(`Connected to database ${client.connectionParameters.database}`);
     })
   });
+

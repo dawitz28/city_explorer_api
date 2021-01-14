@@ -18,7 +18,6 @@ In making of this application I used javaScript, schema.sql and .env files to wr
 ## Change Log
 01-13-21 @2:00pm  - Application now has a fully-functional express server, with a GET route for the location resource.
 
-
 ## Credits and Collaborations
 credits to all my supporter and helper TAs Nicco, Paul, Chance, Bade and my classmate Nassir. 
 

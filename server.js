@@ -161,7 +161,7 @@ client.connect()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Now listening on port, ${PORT}`);
-      console.log(`Connected to database ${client.connectionParameters.database}`);
+      // console.log(`Connected to database ${client.connectionParameters.database}`);
     })
   });
 

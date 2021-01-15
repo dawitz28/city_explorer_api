@@ -45,19 +45,19 @@ let key = process.env.GEOCODEKEY;
 //FUNCTIONS
 function locationHandler(request, response) {
   let city = request.query.city;
-  client.query('SELECT * FROM city08 WHERE search_query=$1', ['search_query'])
+  client.query('SELECT * FROM city08 WHERE search_query=$1', [city])
     .then(database => {
       if (database.rows.length > 0) {
-        console.log(database.rows);
+        console.log('pulling from database',database.rows);
         response.send(database.rows[0]);
       } else {
         const url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${city}&format=json`;
         superagent.get(url)
           .then(database => {
-            console.log(database.body[0]);
+            console.log('not in the database', database.body[0]);
             const locationData = database.body[0];
             const location = new Location(city, locationData);
-            client.query(`INSERT INTO city08 (search_query, formatted_query, longitude, latitude) VALUES ($1, $2, $3, $4);`,
+            client.query(`INSERT INTO city08 (search_query, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4);`,
               [location.search_query, location.formatted_query, location.latitude, location.longitude]);
             response.status(200).send(location);
           }).catch(E => console.log(E));
@@ -114,7 +114,7 @@ function yelpHandler(request, response) {
 
     .then(getBusinessData => {
       const yelpData = getBusinessData.body.businesses;
-      console.log(yelpData);
+      // console.log(yelpData);
       const newData = yelpData.map(getBusinessData => new Yelp (getBusinessData));
       response.send(newData);
     }).catch(error => console.log(error));

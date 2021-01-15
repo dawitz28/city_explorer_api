@@ -1,18 +1,12 @@
 {
   "name": "city_explorer_api",
   "version": "1.0.0",
-  "description": "# Project Name",
+  "description": "",
   "main": "server.js",
-  "engines": {
-    "node": "14.5.0"
-  },
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dawitz28/city_explorer_api.git"
@@ -23,9 +17,7 @@
   "bugs": {
     "url": "https://github.com/dawitz28/city_explorer_api/issues"
   },
-  
   "homepage": "https://github.com/dawitz28/city_explorer_api#readme",
-  
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

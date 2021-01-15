@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', err => {
-  throw err;
+  console.error(err);
 });
 
 // routes:
